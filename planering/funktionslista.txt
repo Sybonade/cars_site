@@ -1,0 +1,93 @@
+selectAllCars($pdo) {
+- Prepare and execute SELECT-query
+- Return the Array
+}
+
+
+filterCars(filterAttribute, filterValue) {
+- Prepare and execute SELECT-query(WHERE filterattribute = filtervalue)
+- Return array (fetchAll())
+}
+
+sortCars(carsId) {
+- Prepare and execute SELECT-query(SELECT all FROM x ORDER BY col1, col2 ASC or DESC)
+- Return the Array
+}
+
+populateCarField(carArray) {
+- Foreach loop on results
+- Every iteration of the loop creates a card with car info according to wireframe
+- Return amount of reults
+}
+
+selectSingleCar($pdo) {
+- Onclick of car card relocate to specifik car page by id
+- Display ready html and input car ID
+}
+
+addAttributes($pdo, table, atrName) {
+- Construct insert string with table
+- Prepare insert with the insert string
+- Execute function
+- Return succes or not 
+}
+
+
+
+insertNewOwner($pdo) {
+- Insert into table_owner
+- Prepare data before inserting
+- Execute function
+- Return succes or not
+}
+
+insertNewCar($pdo) {
+- Prepare and execute INSERT-query
+- Return result
+}
+
+editExistingCar(carId) {
+- Prepare and execute UPDATE-query
+- Return result
+}
+
+markCarAsSold(carId) {
+- Prepare and execute the UPDATE-query(change status of car from 0 to 1 (från false till true))
+- Return result
+}
+
+deleteCar(carId) {.
+- Prepare and execute the DELETE-query
+- Return result
+}
+
+editAttribute($pdo) {
+- Select and update attribute
+- Change the attribute and it updates in the database
+- Return new attribute on site and message to admin update succesfull
+}
+
+deleteAttribute (attributeId) {
+- Prepare and execute the DELETE-query
+- Return result
+}
+
+populateAttribute($pdo) {
+- Echo the attributes that are in the selected attributes function
+- Make data persistant by fetchAll()
+- Return them in array to site
+}
+
+selectAttribute($pdo) {
+- Selecting attributes from the added attributes variable
+- Putting them in dropdown and displaying on site with html
+- Return the working dropdown on site
+}
+
+sanitizeInput(user input) {
+- Run input trhough htmlspecialchar()
+- trim() the Data
+- stripslashes() the Data
+- Return clean Data
+}
+
