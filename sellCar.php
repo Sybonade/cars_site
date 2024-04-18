@@ -11,7 +11,6 @@ if(isset($_POST['add-customer'])) {
 
 if(isset($_POST['add-car'])) {
   echo basename($_FILES["img"]["name"]);
-
 	$orderInsertStatus=newCar($pdo);
   
 	echo $orderInsertStatus;
