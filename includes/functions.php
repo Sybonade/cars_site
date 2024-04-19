@@ -1,18 +1,33 @@
 <?php
 include_once 'config.php';
 
+function cleanInput($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
 function newCustomer($pdo) {
+
+    $fname = cleanInput($_POST['fname']);
+    $lanme = cleanInput($_POST['lanme']);
+    $adress = cleanInput($_POST['adress']);
+    $zip = cleanInput($_POST['zip']);
+    $city = cleanInput($_POST['city']);
+    $phone = cleanInput($_POST['phone']);
+    $email = cleanInput($_POST['email']);
 
     $stmt_newCustomer = $pdo->prepare('INSERT INTO table_owner (owner_fname, owner_lname, owner_adress, owner_city, owner_zip, owner_phone, owner_email) 
     VALUES (:fname, :lname, :adress, :city, :zip, :phone, :email)');
 
-    $stmt_newCustomer->bindParam(':fname' , $_POST['fname'], PDO::PARAM_STR);
-    $stmt_newCustomer->bindParam(':lname' , $_POST['lname'], PDO::PARAM_STR);
-    $stmt_newCustomer->bindParam(':adress' , $_POST['adress'], PDO::PARAM_STR);
-    $stmt_newCustomer->bindParam(':zip' , $_POST['zip'], PDO::PARAM_STR);
-    $stmt_newCustomer->bindParam(':city' , $_POST['city'], PDO::PARAM_STR);
-    $stmt_newCustomer->bindParam(':phone' , $_POST['phone'], PDO::PARAM_STR);
-    $stmt_newCustomer->bindParam(':email' , $_POST['email'], PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':fname' ,$fname , PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':lname' , $lanem, PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':adress' , $adress, PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':zip' , $zip, PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':city' , $city, PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':phone' , $phone, PDO::PARAM_STR);
+    $stmt_newCustomer->bindParam(':email' , $email, PDO::PARAM_STR);
     $stmt_newCustomer->execute();
 
 
@@ -21,7 +36,29 @@ function newCustomer($pdo) {
 
 function newCar($pdo) {
 
-    $car_img = basename($_FILES["img"]["name"]);
+        $model = cleanInput($_POST['model']);
+        $brand = cleanInput($_POST['brand']);
+        $milage = cleanInput($_POST['milage']);
+        $model_year = cleanInput($_POST['model_year']);
+        $price = cleanInput($_POST['price']);
+        $hp = cleanInput($_POST['hp']);
+        $dicplacement = cleanInput($_POST['dicplacement']);
+        $licence = cleanInput($_POST['licence']);
+        $inspection_date = cleanInput($_POST['inspection_date']);
+        $cunsumption = cleanInput($_POST['cunsumption']);
+        $emission = cleanInput($_POST['emission']);
+        $car_weight = cleanInput($_POST['car_weight']);
+        $car_description = cleanInput($_POST['car_description']);
+        $technical = cleanInput($_POST['technical']);
+        $owner_fk = cleanInput($_POST['owner_fk']);
+        $fuel_fk = cleanInput($_POST['fuel_fk']);
+        $trans_fk = cleanInput($_POST['trans_fk']);
+        $body_fk = cleanInput($_POST['body_fk']);
+        $drive_fk = cleanInput($_POST['drive_fk']);
+
+
+        $car_img = cleanInput(basename($_FILES["img"]["name"]));
+        
     $stmt_newCar = $pdo->prepare('INSERT INTO table_cars (cars_model, cars_brand, cars_milage, cars_model_year, cars_price, cars_hp, cars_dicplacement,
     cars_licence, cars_inpsection_date, cars_cunsumption, cars_emission, cars_weight, cars_description, cars_technical, cars_img, cars_owner_fk, cars_fuel_fk,
     cars_trans_fk, cars_body_fk, cars_drive_fk) 
@@ -29,26 +66,26 @@ function newCar($pdo) {
     VALUES (:model, :brand, :milage, :model_year, :price, :hp, :dicplacement, :licence, :inspection_date, :cunsumption, :emission, 
     :car_weight, :car_description,
     :technical, :img, :user, :fuel_fk, :trans_fk, :body_fk, :drive_fk)');
-    $stmt_newCar->bindParam(':model' , $_POST['model'], PDO::PARAM_STR);
-    $stmt_newCar->bindParam(':brand' , $_POST['brand'], PDO::PARAM_STR);
-    $stmt_newCar->bindParam(':milage' , $_POST['milage'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':model_year' , $_POST['model_year'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':price' , $_POST['price'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':hp' , $_POST['hp'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':dicplacement' , $_POST['dicplacement'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':licence' , $_POST['licence'], PDO::PARAM_STR);
-    $stmt_newCar->bindParam(':inspection_date' , $_POST['inspection_date'], PDO::PARAM_STR);
-    $stmt_newCar->bindParam(':cunsumption' , $_POST['cunsumption'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':emission' , $_POST['emission'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':car_weight' , $_POST['car_weight'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':car_description' , $_POST['car_description'], PDO::PARAM_STR);
-    $stmt_newCar->bindParam(':technical' , $_POST['technical'], PDO::PARAM_STR);
+    $stmt_newCar->bindParam(':model' ,$model , PDO::PARAM_STR);
+    $stmt_newCar->bindParam(':brand' ,$brand , PDO::PARAM_STR);
+    $stmt_newCar->bindParam(':milage' ,$milage , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':model_year' ,$model_year , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':price' ,$price , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':hp' ,$hp , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':dicplacement' ,$dicplacement , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':licence' ,$licence , PDO::PARAM_STR);
+    $stmt_newCar->bindParam(':inspection_date' ,$inspection_date , PDO::PARAM_STR);
+    $stmt_newCar->bindParam(':cunsumption' ,$cunsumption , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':emission' ,$emission , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':car_weight' ,$car_weight , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':car_description' ,$car_description , PDO::PARAM_STR);
+    $stmt_newCar->bindParam(':technical' ,$technical , PDO::PARAM_STR);
     $stmt_newCar->bindParam(':img' , $car_img, PDO::PARAM_STR);
-    $stmt_newCar->bindParam(':user' , $_POST['owner_fk'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':fuel_fk' , $_POST['fuel_fk'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':trans_fk' , $_POST['trans_fk'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':body_fk' , $_POST['body_fk'], PDO::PARAM_INT);
-    $stmt_newCar->bindParam(':drive_fk' , $_POST['drive_fk'], PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':user' ,$owner_fk , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':fuel_fk' ,$fuel_fk , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':trans_fk' ,$trans_fk , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':body_fk' ,$body_fk , PDO::PARAM_INT);
+    $stmt_newCar->bindParam(':drive_fk' ,$drive_fk , PDO::PARAM_INT);
     $stmt_newCar->execute();
 
 }
@@ -114,31 +151,50 @@ function selectSingleCar($pdo, $currentId) {
 
 function updateNodeInfo($pdo, $currentId) {
 
-    $car_img = basename($_FILES["img"]["name"]);
+    $model = cleanInput($_POST['model']);
+    $brand = cleanInput($_POST['brand']);
+    $milage = cleanInput($_POST['milage']);
+    $model_year = cleanInput($_POST['model_year']);
+    $price = cleanInput($_POST['price']);
+    $hp = cleanInput($_POST['hp']);
+    $dicplacement = cleanInput($_POST['dicplacement']);
+    $licence = cleanInput($_POST['licence']);
+    $inspection_date = cleanInput($_POST['inspection_date']);
+    $cunsumption = cleanInput($_POST['cunsumption']);
+    $emission = cleanInput($_POST['emission']);
+    $car_weight = cleanInput($_POST['car_weight']);
+    $car_description = cleanInput($_POST['car_description']);
+    $technical = cleanInput($_POST['technical']);
+    $fuel_fk = cleanInput($_POST['fuel_fk']);
+    $trans_fk = cleanInput($_POST['trans_fk']);
+    $body_fk = cleanInput($_POST['body_fk']);
+    $drive_fk = cleanInput($_POST['drive_fk']);
+
+    $car_img = cleanInput(basename($_FILES["img"]["name"]));
 
 	$stmt_updateNodeInfo = $pdo->prepare('UPDATE table_cars SET cars_model = :model, cars_brand = :brand, cars_milage = :milage, cars_model_year = :modelYear, cars_price = :price, cars_hp = :power, cars_dicplacement = :dicpl,
     cars_licence = :licence, cars_inpsection_date = :inspection, cars_cunsumption = :cunsumption, cars_emission = :emission, cars_weight = :weigth, cars_description = :descript, cars_technical = :technical, cars_img = :img, cars_fuel_fk = :fuelfk,
     cars_trans_fk = :transfk, cars_body_fk = :bodyfk, cars_drive_fk = :drivefk WHERE cars_id = :id');
 	$stmt_updateNodeInfo->bindParam(':id', $currentId, PDO::PARAM_INT);
-	$stmt_updateNodeInfo->bindParam(':model' , $_POST['model'], PDO::PARAM_STR);
-    $stmt_updateNodeInfo->bindParam(':brand' , $_POST['brand'], PDO::PARAM_STR);
-    $stmt_updateNodeInfo->bindParam(':milage' , $_POST['milage'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':modelYear' , $_POST['model_year'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':price' , $_POST['price'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':power' , $_POST['hp'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':dicpl' , $_POST['dicplacement'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':licence' , $_POST['licence'], PDO::PARAM_STR);
-    $stmt_updateNodeInfo->bindParam(':inspection' , $_POST['inspection_date'], PDO::PARAM_STR);
-    $stmt_updateNodeInfo->bindParam(':cunsumption' , $_POST['cunsumption'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':emission' , $_POST['emission'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':weigth' , $_POST['car_weight'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':descript' , $_POST['car_description'], PDO::PARAM_STR);
-    $stmt_updateNodeInfo->bindParam(':technical' , $_POST['technical'], PDO::PARAM_STR);
+    $stmt_updateNodeInfo->bindParam(':model' ,$model , PDO::PARAM_STR);
+    $stmt_updateNodeInfo->bindParam(':brand' ,$brand , PDO::PARAM_STR);
+    $stmt_updateNodeInfo->bindParam(':milage' ,$milage , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':model_year' ,$model_year , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':price' ,$price , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':hp' ,$hp , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':dicplacement' ,$dicplacement , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':licence' ,$licence , PDO::PARAM_STR);
+    $stmt_updateNodeInfo->bindParam(':inspection_date' ,$inspection_date , PDO::PARAM_STR);
+    $stmt_updateNodeInfo->bindParam(':cunsumption' ,$cunsumption , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':emission' ,$emission , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':car_weight' ,$car_weight , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':car_description' ,$car_description , PDO::PARAM_STR);
+    $stmt_updateNodeInfo->bindParam(':technical' ,$technical , PDO::PARAM_STR);
     $stmt_updateNodeInfo->bindParam(':img' , $car_img, PDO::PARAM_STR);
-    $stmt_updateNodeInfo->bindParam(':fuelfk' , $_POST['fuel_fk'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':transfk' , $_POST['trans_fk'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':bodyfk' , $_POST['body_style_fk'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':drivefk' , $_POST['drive_fk'], PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':fuel_fk' ,$fuel_fk , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':trans_fk' ,$trans_fk , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':body_fk' ,$body_fk , PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':drive_fk' ,$drive_fk , PDO::PARAM_INT);
 	if($stmt_updateNodeInfo->execute()){
 		return "<h2 style='color: green;'>Status Updated</h2>";
 		}
