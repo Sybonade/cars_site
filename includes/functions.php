@@ -68,8 +68,13 @@ function populateOwner($stmt_getOweners) {
 }
 
 function getCars($pdo) {
+    $carSold = 0;
     global $stmt_getCars;
-    $stmt_getCars = $pdo->query("SELECT * FROM table_cars");
+    $stmt_getCars = $pdo->prepare("SELECT * FROM table_cars WHERE cars_sold_status = :sold");
+    $stmt_getCars->bindParam(':sold', $carSold, PDO::PARAM_INT);
+    $stmt_getCars->execute();
+
+
 
 }
 
@@ -132,7 +137,7 @@ function updateNodeInfo($pdo, $currentId) {
     $stmt_updateNodeInfo->bindParam(':img' , $car_img, PDO::PARAM_STR);
     $stmt_updateNodeInfo->bindParam(':fuelfk' , $_POST['fuel_fk'], PDO::PARAM_INT);
     $stmt_updateNodeInfo->bindParam(':transfk' , $_POST['trans_fk'], PDO::PARAM_INT);
-    $stmt_updateNodeInfo->bindParam(':bodyfk' , $_POST['body_fk'], PDO::PARAM_INT);
+    $stmt_updateNodeInfo->bindParam(':bodyfk' , $_POST['body_style_fk'], PDO::PARAM_INT);
     $stmt_updateNodeInfo->bindParam(':drivefk' , $_POST['drive_fk'], PDO::PARAM_INT);
 	if($stmt_updateNodeInfo->execute()){
 		return "<h2 style='color: green;'>Status Updated</h2>";
