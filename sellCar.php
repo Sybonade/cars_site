@@ -16,7 +16,7 @@ if(isset($_POST['add-car'])) {
 	echo $orderInsertStatus;
 }
 
-$allOwners = getOwners($pdo);
+$allOwners = getOwners($pdo)
 
 ?>
 

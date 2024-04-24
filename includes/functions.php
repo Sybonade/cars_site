@@ -53,7 +53,7 @@ function newCar($pdo) {
         $owner_fk = cleanInput($_POST['owner_fk']);
         $fuel_fk = cleanInput($_POST['fuel_fk']);
         $trans_fk = cleanInput($_POST['trans_fk']);
-        $body_fk = cleanInput($_POST['body_fk']);
+        $body_fk = cleanInput($_POST['body_style_fk']);
         $drive_fk = cleanInput($_POST['drive_fk']);
 
 
