@@ -8,6 +8,53 @@ function cleanInput($data) {
     return $data;
 }
 
+function addAttribute($pdo) {
+
+    if (empty($_POST['fuel'])) {$fuel = NULL;} else {$fuel = cleanInput($_POST['fuel']);}
+    if (empty($_POST['trans'])) {$trans = NULL;} else {$trans = cleanInput($_POST['trans']);}
+    if (empty($_POST['body'])) {$body = NULL;} else {$body = cleanInput($_POST['body']);}
+    if (empty($_POST['drive'])) {$drive = NULL;} else {    $drive = cleanInput($_POST['drive']);}
+
+
+    $addFuelType = $pdo->prepare("INSERT INTO table_fueltype (fuel_name) VALUES (:fuel)");
+    $addFuelType->bindParam(":fuel", $fuel, PDO::PARAM_STR);
+    if($addFuelType->execute()) {
+         echo "Succes";
+    }else {
+         echo "Something went wrong";
+    }
+
+    $addDriveType = $pdo->prepare("INSERT INTO table_drivetrain (drive_name) VALUES (:drive)");
+    $addDriveType->bindParam(":drive", $drive, PDO::PARAM_STR);
+    if($addDriveType->execute()) {
+    echo "Succes";
+}else {
+     echo "Something went wrong";
+}
+
+
+
+    $addBodyType = $pdo->prepare("INSERT INTO table_body_style (body_style_name) VALUES (:body)");
+    $addBodyType->bindParam(":body", $body, PDO::PARAM_STR);
+    if($addBodyType->execute()) {
+    echo "Succes";
+}else {
+     echo "Something went wrong";
+}
+
+
+
+    $addTransType = $pdo->prepare("INSERT INTO table_trans_type (trans_name) VALUES (:trans)");
+    $addTransType->bindParam(":trans", $trans, PDO::PARAM_STR);
+    if($addTransType->execute()) {
+    echo "Succes";
+}else {
+     echo "Something went wrong";
+}
+
+
+}
+
 function newCustomer($pdo) {
 
     $fname = cleanInput($_POST['fname']);
@@ -119,7 +166,7 @@ function populateCars($stmt_getCars) {
     foreach ($stmt_getCars as $row) {
     echo "<div class='col-4' style='padding-rigth: 0px !important;'>
     <div style='min-height: 400px !important;' class='card mb-3'>
-    <img class='card-img-top' id='card_img' src='uploads/{$row['cars_img']}' alt='Card image cap'>
+    <img class='card-img-top same-size-car-img' id='card_img' src='uploads/{$row['cars_img']}' alt='Card image cap'>
     <div class='card-body'>
       <h5 class='card-title'>{$row['cars_brand']}, {$row['cars_model']}</h5>
       <h6>{$row['cars_milage']}</h6>
